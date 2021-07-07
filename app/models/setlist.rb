@@ -1,0 +1,2 @@
+class Setlist < ApplicationRecord
+end

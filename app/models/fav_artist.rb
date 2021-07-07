@@ -1,0 +1,2 @@
+class PersonalArtist < ApplicationRecord
+end
