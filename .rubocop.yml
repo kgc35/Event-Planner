@@ -1,0 +1,17 @@
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/Copyright:
+  Enabled: false
+
+Lint/ConstantResolution:
+  Enabled: false
+
+Style/DocumentationMethod:
+  Enabled: false
+
+AllCops:
+  EnabledByDefault: true
