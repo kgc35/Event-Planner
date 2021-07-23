@@ -1,25 +1,86 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Route, Switch } from "react-router-dom";
+import { Component } from "react";
+import { withRouter } from "react-router-dom";
+import Login from "./Components/Login";
+import NavBar from "./Components/NavBar";
+import Main from "./Components/Main";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  state = {
+    users: [],
+    artists: [],
+    loggedinUser: [],
+  };
+
+  componentDidMount() {
+    fetch("http://localhost:3292/users")
+      .then((res) => res.json())
+      .then((users) => {
+        fetch("http://localhost:3292/artists")
+          .then((res) => res.json())
+          .then((artists) =>
+            this.setState({
+              users: users,
+              artists: artists,
+            })
+          );
+      });
+  }
+
+  addNewUser = (newUser) => {
+    this.setState({
+      users: [...this.state.users, newUser],
+    });
+  };
+
+  handleUserLogin = (loginUserObj) => {
+    this.setState({
+      loggedinUser: loginUserObj,
+    });
+  };
+
+  handleHomeButton = () => {
+    this.props.history.push("/");
+  };
+
+  render() {
+    return (
+      <div className="App">
+        <NavBar
+          handleLogout={this.handleLogout}
+          loggedinUser={this.state.loggedinUser}
+          handleHomeButton={this.handleHomeButton}
+        />
+
+        <Switch>
+          <Route
+            exact
+            path="/login"
+            component={(props) => (
+              <Login
+                {...props}
+                handleUserLogin={this.handleUserLogin}
+                addNewUser={this.addNewUser}
+                users={this.state.users}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/"
+            component={(props) => (
+              <Main
+                {...props}
+                users={this.state.users}
+                loggedinUser={this.state.loggedinUser}
+              />
+            )}
+          />
+        </Switch>
+      </div>
+    );
+  }
 }
 
-export default App;
+export default withRouter(App);

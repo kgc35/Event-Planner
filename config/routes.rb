@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :artists, only: %i[create destroy]
+  resources :artists, only: %i[index show create destroy]
   resources :fav_artists, only: %i[create destroy]
   resources :setlists, only: %i[create destroy]
   resources :users, only: %i[index show create update destroy]
