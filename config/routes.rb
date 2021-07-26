@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
-  resources :artists, only: %i[index show create destroy]
-  resources :fav_artists, only: %i[create destroy]
-  resources :setlists, only: %i[create destroy]
+  resources :events, only: %i[index show create destroy]
+  resources :rsvps, only: %i[create destroy]
   resources :users, only: %i[index show create update destroy]
   # Routing logic: fallback requests for React Router.
   # Leave this here to help deploy your app later!
