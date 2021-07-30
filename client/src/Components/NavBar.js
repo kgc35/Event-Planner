@@ -1,29 +1,40 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 export default class NavBar extends Component {
   render() {
     return (
-      <div className="navbar">
-        <h1>Concert Setlists</h1>
-
-        {this.props.loggedinUser.length > 0 ? (
+      <nav className="navbar">
+        {this.props.id > 0 ? (
           <>
-            <h3 className="navbar-btn" onClick={this.props.handleHomeButton}>
-              Home
-            </h3>
+            <li className="nav-link">
+              <Link className="nav-link" to="/">
+                Home
+              </Link>
+            </li>
 
-            <h3>Favorite Artists</h3>
-            <h4>{this.props.loggedinUser[0].username}</h4>
+            <li className="nav-link">
+              <Link className="nav-link" to="/rsvps">
+                RSVPs
+              </Link>
+            </li>
 
-            <button
-              className="navbar-btn"
-              onClick={() => this.props.handleLogout(this.props)}
-            >
-              Log out
-            </button>
+            <li className="nav-link">
+              <p>{this.props.username}</p>
+            </li>
+
+            <li className="nav-link">
+              <Link
+                className="nav-link"
+                to="/login"
+                onClick={() => this.props.handleLogout(this.props)}
+              >
+                Log out
+              </Link>
+            </li>
           </>
         ) : null}
-      </div>
+      </nav>
     );
   }
 }

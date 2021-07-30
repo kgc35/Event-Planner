@@ -27,6 +27,17 @@ class EventsController < ApplicationController
     end
   end
 
+  def update
+    event = Event.find(params[:id])
+
+    if event
+      event.update(event_params)
+      render(json: event)
+    else
+      render(json: { errors: event.errors.full_messages })
+    end
+  end
+
   def destroy
     event = Event.find(params[:id])
 

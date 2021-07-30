@@ -5,43 +5,60 @@ import { withRouter } from "react-router-dom";
 import Login from "./Components/Login";
 import NavBar from "./Components/NavBar";
 import Main from "./Components/Main";
+import EventDetail from "./Components/EventDetail";
 
 class App extends Component {
   state = {
-    users: [],
-    artists: [],
-    loggedinUser: [],
+    id: 0,
+    username: "",
+    email: "",
+    hosted_events: [],
+    rsvps: [],
+    events: [],
+    profile_img: "",
+    selectedEvent: {},
   };
 
   componentDidMount() {
-    fetch("http://localhost:3292/users")
+    fetch("http://localhost:3292/events")
       .then((res) => res.json())
-      .then((users) => {
-        fetch("http://localhost:3292/artists")
-          .then((res) => res.json())
-          .then((artists) =>
-            this.setState({
-              users: users,
-              artists: artists,
-            })
-          );
+      .then((events) => {
+        this.setState({
+          events: events,
+        });
       });
   }
 
-  addNewUser = (newUser) => {
+  handleUserLogin = (data) => {
+    console.log("I was called");
     this.setState({
-      users: [...this.state.users, newUser],
+      id: data.id,
+      username: data.username,
+      email: data.email,
+      hosted_events: data.hosted_events,
+      rsvps: data.rsvps,
+      profile_img: data.profile_img,
     });
   };
 
-  handleUserLogin = (loginUserObj) => {
+  // handleHomeButton = () => {
+  //   this.props.history.push("/");
+  // };
+
+  handleLogout = () => {
     this.setState({
-      loggedinUser: loginUserObj,
+      id: 0,
+      username: "",
+      email: "",
+      hosted_events: [],
+      rsvps: [],
+      profile_img: "",
     });
   };
 
-  handleHomeButton = () => {
-    this.props.history.push("/");
+  handleSelectEvent = (event) => {
+    this.setState({ selectedEvent: event });
+    this.props.history.push("/eventdetails");
   };
 
   render() {
@@ -49,8 +66,8 @@ class App extends Component {
       <div className="App">
         <NavBar
           handleLogout={this.handleLogout}
-          loggedinUser={this.state.loggedinUser}
-          handleHomeButton={this.handleHomeButton}
+          id={this.state.id}
+          username={this.state.username}
         />
 
         <Switch>
@@ -58,12 +75,7 @@ class App extends Component {
             exact
             path="/login"
             component={(props) => (
-              <Login
-                {...props}
-                handleUserLogin={this.handleUserLogin}
-                addNewUser={this.addNewUser}
-                users={this.state.users}
-              />
+              <Login {...props} handleUserLogin={this.handleUserLogin} />
             )}
           />
           <Route
@@ -72,8 +84,21 @@ class App extends Component {
             component={(props) => (
               <Main
                 {...props}
-                users={this.state.users}
-                loggedinUser={this.state.loggedinUser}
+                handleSelectEvent={this.handleSelectEvent}
+                id={this.state.id}
+                events={this.state.events}
+              />
+            )}
+          />
+          <Route
+            exact
+            path="/eventdetails"
+            component={(props) => (
+              <EventDetail
+                {...props}
+                selectedEvent={this.state.selectedEvent}
+                id={this.state.id}
+                events={this.state.events}
               />
             )}
           />
