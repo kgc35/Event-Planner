@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Event from "./Event";
+import EventForm from "./EventForm";
 
 class Main extends Component {
   render() {
@@ -10,6 +11,7 @@ class Main extends Component {
       <div class="container container mt-4 mb-5">
         <h3 class="display-4 text-center"> Home Page </h3>
         <div className="row">
+          <EventForm id={this.props.id} createEvent={this.props.createEvent} />
           {this.props.events.map((event) => {
             return (
               <Event

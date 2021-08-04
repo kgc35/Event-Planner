@@ -26,7 +26,6 @@ export default class Login extends Component {
       body: JSON.stringify(user),
     }).then((res) => {
       res.json().then((data) => {
-        console.log(data);
         if (data.id) {
           alert(`Welcome back ${data.username}`);
           this.props.handleUserLogin(data);

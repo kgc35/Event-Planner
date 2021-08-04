@@ -1,4 +1,9 @@
 class RsvpsController < ApplicationController
+  def index
+    rsvps = Rsvp.all
+    render(json: rsvps)
+  end
+
   def create
     rsvp = Rsvp.new(rsvp_params)
 
@@ -15,7 +20,7 @@ class RsvpsController < ApplicationController
 
     if rsvp
       rsvp.destroy
-      render(json: {}, status: 204)
+      render(json: rsvp, status: 200)
     else
       render(json: { error: 'RSVP not found' }, status: 404)
     end
@@ -24,6 +29,6 @@ class RsvpsController < ApplicationController
   private
 
   def rsvp_params
-    params.permit(:user_id, :event_id, :boolean)
+    params.permit(:user_id, :event_id, :accepted)
   end
 end

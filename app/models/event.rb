@@ -3,6 +3,8 @@ class Event < ApplicationRecord
   has_many :users, through: :rsvps
   belongs_to :user
 
+  validates :name, :time, :location, :description, :cost, :public, :event_img, :user_id, presence: true
+
   def attending_users
     users.map { |user| { username: user.username, profile_img: user.profile_img } }
   end

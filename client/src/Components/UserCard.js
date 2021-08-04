@@ -16,20 +16,9 @@ export default class UserCard extends Component {
             />
           </div>
           <p className="float-left">
-            <strong>Username: </strong> {this.props.user.username}
+            <strong>Username: </strong>
+            {capitalizeFirstLetter(this.props.user.username)}
           </p>
-          {/* {this.props.loginUser.id === this.props.recommendation.user ? (
-            <div>
-              <button
-                className="btn btn-sm btn-danger"
-                onClick={() =>
-                  this.props.removeReview(this.props.recommendation)
-                }
-              >
-                Delete
-              </button>
-            </div>
-          ) : null} */}
         </div>
       </div>
     );
