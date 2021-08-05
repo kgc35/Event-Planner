@@ -66,99 +66,129 @@ export default class Login extends Component {
   render() {
     return (
       <body className="text-center">
-        <h1>Welcome</h1>
+        <h1 className="mb-3 font-weight-normal">Welcome</h1>
         <main className="form-signin">
-          <form className="login" onSubmit={(e) => this.handleLogin(e)}>
-            <label>
-              <h1 className="h3 mb-3 fw-normal">Log In </h1>
-              <div className="form-floating">
-                <input
-                  id="floatingInput"
-                  type="text"
-                  name="username"
-                  placeholder="Username"
-                  value={this.state.username}
-                  onChange={(e) =>
-                    this.setState({
-                      username: e.target.value.toLowerCase(),
-                    })
-                  }
-                />
+          <img
+            class=""
+            src="https://icons.iconarchive.com/icons/martz90/circle/512/calendar-icon.png"
+            alt=""
+            width="100"
+            height="100"
+          ></img>
+          <div className="col-sm-8 col-md-7 col-lg-5 mx-auto">
+            <div className="card border-0 shadow rounded-3 my-5">
+              <div className="card-body p-4 p-sm-5">
+                <form className="login" onSubmit={(e) => this.handleLogin(e)}>
+                  <label>
+                    <h1 className="h2 mb-3 fw-normal">Log In </h1>
+                    <p className="login-input">
+                      <input
+                        id="floatingInput"
+                        type="text"
+                        name="username"
+                        placeholder="Username"
+                        value={this.state.username}
+                        onChange={(e) =>
+                          this.setState({
+                            username: e.target.value.toLowerCase(),
+                          })
+                        }
+                      />
+                    </p>
+                    <p className="form-floating">
+                      <input
+                        id="floatingPassword"
+                        type="password"
+                        placeholder="Password"
+                        value={this.state.password}
+                        onChange={(e) =>
+                          this.setState({
+                            password: e.target.value,
+                          })
+                        }
+                      />
+                    </p>
+                  </label>
+                  <p className="login-input">
+                    <button
+                      className="btn btn-lg btn-primary btn-block"
+                      type="submit"
+                    >
+                      Log In
+                    </button>
+                  </p>
+                </form>
               </div>
-              <div className="form-floating">
-                <input
-                  id="floatingPassword"
-                  type="password"
-                  placeholder="Password"
-                  value={this.state.password}
-                  onChange={(e) =>
-                    this.setState({
-                      password: e.target.value,
-                    })
-                  }
-                />
+            </div>
+          </div>
+          <div className="col-sm-8 col-md-7 col-lg-5 mx-auto">
+            <div className="card border-0 shadow rounded-3 my-5">
+              <div className="card-body p-4 p-sm-5">
+                <form className="signup" onSubmit={(e) => this.handleSignup(e)}>
+                  <label>
+                    <h1 className="h2 mb-3 fw-normal">Sign Up</h1>
+                    <p className="login-input">
+                      <input
+                        type="text"
+                        placeholder="Username"
+                        value={this.state.signupUsername}
+                        onChange={(e) =>
+                          this.setState({
+                            signupUsername: e.target.value.toLowerCase(),
+                          })
+                        }
+                      />
+                    </p>
+                    <p className="login-input">
+                      <input
+                        type="email"
+                        placeholder="Email address"
+                        value={this.state.signupEmail}
+                        onChange={(e) =>
+                          this.setState({
+                            signupEmail: e.target.value,
+                          })
+                        }
+                      />
+                    </p>
+                    <p className="login-input">
+                      <input
+                        type="password"
+                        placeholder="Password"
+                        value={this.state.signupPassword}
+                        onChange={(e) =>
+                          this.setState({
+                            signupPassword: e.target.value,
+                          })
+                        }
+                      />
+                    </p>
+                    <p className="login-input">
+                      <input
+                        type="profile_img"
+                        placeholder="Profile Image Link"
+                        value={this.state.signupProfile_img}
+                        onChange={(e) =>
+                          this.setState({
+                            signupProfile_img: e.target.value,
+                          })
+                        }
+                      />
+                    </p>
+                  </label>
+                  <p className="login-input">
+                    <button
+                      className="btn btn-lg btn-primary btn-block"
+                      type="submit"
+                    >
+                      Sign Up
+                    </button>
+                  </p>
+                  <p class="mt-5 mb-3 text-muted">© 2021</p>
+                </form>
               </div>
-            </label>
-            <p className="login-input">
-              <input className="login-btn" type="submit" value="Log In" />
-            </p>
-          </form>
-          <form className="signup" onSubmit={(e) => this.handleSignup(e)}>
-            <label>
-              <h1 className="h3 mb-3 fw-normal">Sign Up</h1>
-              <p className="login-input">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={this.state.signupUsername}
-                  onChange={(e) =>
-                    this.setState({
-                      signupUsername: e.target.value.toLowerCase(),
-                    })
-                  }
-                />
-              </p>
-              <p className="login-input">
-                <input
-                  type="email"
-                  placeholder="Email address"
-                  value={this.state.signupEmail}
-                  onChange={(e) =>
-                    this.setState({
-                      signupEmail: e.target.value,
-                    })
-                  }
-                />
-              </p>
-              <p className="login-input">
-                <input
-                  type="password"
-                  placeholder="Password"
-                  value={this.state.signupPassword}
-                  onChange={(e) =>
-                    this.setState({
-                      signupPassword: e.target.value,
-                    })
-                  }
-                />
-              </p>
-              <p className="login-input">
-                <input
-                  type="profile_img"
-                  placeholder="Profile Image Link"
-                  value={this.state.signupProfile_img}
-                  onChange={(e) =>
-                    this.setState({
-                      signupProfile_img: e.target.value,
-                    })
-                  }
-                />
-              </p>
-            </label>
-            <p className="login-input">
-              <input className="signup-btn" type="submit" value="Sign Up" />
-            </p>
-          </form>
+            </div>
+          </div>
         </main>
       </body>
     );

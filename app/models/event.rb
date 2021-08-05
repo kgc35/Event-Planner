@@ -6,7 +6,7 @@ class Event < ApplicationRecord
   validates :name, :time, :location, :description, :cost, :public, :event_img, :user_id, presence: true
 
   def attending_users
-    users.map { |user| { username: user.username, profile_img: user.profile_img } }
+    users.map { |user| { username: user.username, profile_img: user.profile_img, user_id: user.id } }
   end
 
   def nice_timestamp

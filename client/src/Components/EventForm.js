@@ -105,6 +105,7 @@ export default class EventForm extends Component {
           />
           <br />
           <label>
+            Public:&nbsp;
             <input
               type="radio"
               name="public"

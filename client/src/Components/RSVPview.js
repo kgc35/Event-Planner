@@ -11,30 +11,33 @@ class RSVPview extends Component {
     // filtered_events = this.props.all_events.filter((event) => event !== )
     return (
       <div class="container container mt-4 mb-5">
-        <h3 class="display-4 text-center"> My RSVPs </h3>
-        {this.props.RSVPevents.map((rsvp) => {
-          return (
-            <Event
-              key={rsvp.id}
-              event={rsvp.event}
-              handleSelectEvent={this.props.handleSelectEvent}
-            />
-          );
-        })}
-
-        <h3 class="display-4 text-center"> My Hosted Events </h3>
-
+        <h3 class="display-3 text-center"> My RSVPs </h3>
         <div className="row">
-          {this.props.hosted_events.map((event) => {
+          {this.props.RSVPevents.map((rsvp) => {
             return (
               <Event
-                key={event.id}
-                event={event}
+                key={rsvp.id}
+                event={rsvp.event}
                 handleSelectEvent={this.props.handleSelectEvent}
               />
             );
           })}
         </div>
+
+        <h3 class="display-3 text-center"> My Hosted Events </h3>
+        <body className="text-center">
+          <div className="row">
+            {this.props.hosted_events.map((event) => {
+              return (
+                <Event
+                  key={event.id}
+                  event={event}
+                  handleSelectEvent={this.props.handleSelectEvent}
+                />
+              );
+            })}
+          </div>
+        </body>
       </div>
     );
   }

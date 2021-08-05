@@ -11,12 +11,15 @@ export default class EventDetail extends Component {
     let extract_id = this.props.rsvps.map((rsvp) => rsvp.event_id);
     let joined = extract_id.includes(event.id);
 
+    if (event.cost === 0) {
+      event.cost = "Free";
+    }
     return (
-      <div class="container py-4 my-4 mx-auto d-flex flex-column">
+      <div class="container">
         <div>
           {!joined ? (
             <button
-              className="btn btn-sm btn-primary"
+              className="btn btn-lg btn-primary"
               onClick={() =>
                 this.props.createRSVP({
                   user_id: this.props.id,
@@ -29,7 +32,7 @@ export default class EventDetail extends Component {
             </button>
           ) : (
             <button
-              className="btn btn-sm btn-primary"
+              className="btn btn-lg btn-danger"
               onClick={() =>
                 this.props.deleteRSVP({
                   user_id: this.props.id,
@@ -40,32 +43,51 @@ export default class EventDetail extends Component {
               Leave Event
             </button>
           )}
+          &nbsp;
           <button
-            className="btn btn-sm btn-primary"
+            className="btn btn-lg btn-success"
             onClick={() => this.props.history.push("/")}
           >
             Back
           </button>
+          <h1 className="display-3 my-4">{event.name}</h1>
           <div class="row">
-            <h1>{event.name}</h1>
-            <div class="col-md-5">
-              <img className="image" src={event.event_img} alt="event image" />
+            <div class="col-md-6">
+              <img
+                className="img-fluid"
+                src={event.event_img}
+                alt="event image"
+              />
             </div>
-            <div class="col-md-5">
-              <p>Description : {event.description}</p>
-              <p>Location : {event.location}</p>
-              <p>Date & Time: {event.nice_timestamp}</p>
-              <p>Cost: {event.cost}</p>
+            <div class="col-sm-8 col-md-5 col-lg-6 mx-auto">
+              <div className="border-0 border-light-sm shadow-sm rounded-3">
+                <div className="card-body p-0 p-sm-4">
+                  <p className="image-txt-container">
+                    <h3 className="my-3 mx-3">Description:</h3>
+                    <span className="h5">{event.description}</span>
+                  </p>
+                  <br />
+                  <p className="image-txt-container">
+                    <h3 className="my-3 mx-3">Location:</h3>
+                    <span className="h5">{event.location}</span>
+                  </p>
+                  <br />
+                  <p className="image-txt-container">
+                    <h3 className="my-3 mx-3">Date & Time:</h3>
+                    <span className="h5">{event.nice_timestamp}</span>
+                  </p>
+                  <br />
+                  <p className="image-txt-container">
+                    <h3 className="my-3 mx-3">Cost:</h3>
+                    <span className="h5">{event.cost} </span>
+                  </p>
+                </div>
+              </div>
             </div>
-            <div>
+            <h3 class="my-4 display-6">Attending Users</h3>
+            <div className="row">
               {event.attending_users.map((user, index) => {
-                return (
-                  <div class="card">
-                    <div class="card-body">
-                      <UserCard user={user} key={index} />
-                    </div>
-                  </div>
-                );
+                return <UserCard user={user} key={index} event={event} />;
               })}
             </div>
           </div>

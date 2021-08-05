@@ -192,6 +192,7 @@ class App extends Component {
           handleLogout={this.handleLogout}
           id={this.state.id}
           username={this.state.username}
+          profile_img={this.state.profile_img}
         />
 
         <Switch>
@@ -227,6 +228,7 @@ class App extends Component {
                 createRSVP={this.createRSVP}
                 deleteRSVP={this.deleteRSVP}
                 rsvps={this.state.rsvps}
+                hosted_event_ids={this.state.hosted_event_ids}
               />
             )}
           />
@@ -245,6 +247,13 @@ class App extends Component {
             )}
           />
         </Switch>
+        <footer class="sticky-footer footer border-top border-dark mt-auto py-3">
+          <div class="container">
+            <div className="row">
+              <span class="text-muted"></span>
+            </div>
+          </div>
+        </footer>
       </div>
     );
   }
